@@ -1,0 +1,79 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        td, th {
+            border: 2px solid black;
+        }
+        table{
+            border: 2px solid black;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th colspan = 11>
+                COURSE SCHEDULE
+                ALATOO INTERNATIONAL UNIVERSITY - DEPARTMENT OF COMPUTER SCIENCE
+                2020-2021 FALL SEMESTER
+            </th>
+        </tr>
+        <tr>
+            <th colspan="2" rowspan = "2">Day/Time</th>
+            <th>Hour 1</th>
+            <th>Hour 2</th>
+            <th>Hour 3</th>
+            <th>Hour 4</th>
+            <th>Lunch</th>
+            <th>Hour 5</th>
+            <th>Hour 6</th>
+            <th>Hour 7</th>
+            <th>Hour 8</th>
+        </tr>
+        <tr>
+            <td>9:00-9:40</td>
+            <td>9:50-10:30</td>
+            <td>10:40-11:20</td>
+            <td>11:30-12:10</td>
+            <td></td>
+            <td>13:00-13:40</td>
+            <td>13:50-14:30</td>
+            <td>14:40-15:20</td>
+            <td>15:30-16:10</td>
+        </tr>
+        {% for k in days_of_week %}
+            <tr>
+                <td>{{k}}</td>
+            {% for i in courses %}
+                {% for j in i.quantity_of_groups|parse_int %}
+                    <tr>    
+                        <td></td>
+                        <td>{{i.course}}{{j}}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+        {% for i in courses %}
+            {% for k in i.subject.all %}
+                <p>{{k.sub_name}}</p>
+                <p>{{k.lessons_per_week}}</p>
+            {% endfor %}
+        {% endfor %}
+    </table>
+</body>
+</html>
